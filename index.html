@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- El CSP es un PITA (si sabes a lo que me refiero ;)) 
+    le quitamos las restricciones con fines educativos, 
+    no lo hagas en casa!-->
+    <meta http-equiv="Content-Security-Policy" content="">
+    <!-- incluimos bulma css -->
+    <link rel="stylesheet" href="bulma/css/bulma.min.css">
+    <title>Formateador</title>
+    <script>
+        window.addEventListener('load', (event) => {
+            
+        });
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <div class="tabs is-centered">
+                <ul>
+                    <li class="is-active" id="tab-texto"><a>Texto</a></li>
+                    <li id="tab-documento"><a>Subir Documento</a></li>
+                </ul>
+            </div>
+            <div class="box" id="content-texto">
+                <textarea class="textarea" id="text-area" placeholder="Escribe tu texto aquí..."></textarea>
+            </div>
+            <div class="box" id="content-documento" style="display: none;">
+                <input type="file" id="file-input" style="display: none;" required>
+                <button class="button is-primary" id="btn-subir">Subir Archivo</button>
+                <button class="button is-danger" id="btn-quitar" style="display: none;">Quitar Archivo</button>
+                <p id="file-name" class="mt-2"></p>
+                <p id="error-message" class="has-text-danger mt-2" style="display: none;">Debe seleccionar un archivo si no ingresa texto.</p>
+            </div>
+            <div class="box" >
+                <button class="button is-success mt-3" id="btn-enviar">Enviar</button>
+                <button class="button is-danger" id="btn-borrar" style="display: none;">Borrar resultado</button>
+            </div>
+            
+            
+            <div class="box mt-5" id="resultado" style="display: none;">
+                <h2 class="title is-4">Resultado: <button class="button is-success mt-3" id="btn-copiar">Copiar</button></h2>
+                <pre id="output"></pre>
+            </div>
+        </div>
+    </section>
+</body>
+<script src="./funciones.js"></script>
+</html>
