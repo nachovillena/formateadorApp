@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnQuitar = document.getElementById("btn-quitar");
     const btnBorrar = document.getElementById("btn-borrar");
     const btnCopiar = document.getElementById("btn-copiar");
+    const btnExcel = document.getElementById("btn-excel");
     const fileName = document.getElementById("file-name");
     const textArea = document.getElementById("text-area");
     const btnEnviar = document.getElementById("btn-enviar");
@@ -66,6 +67,15 @@ document.addEventListener("DOMContentLoaded", () => {
           });
     });
 
+    btnExcel.addEventListener("click", async () => {
+        const result = await window.electron.generarExcel(generarDatosExcel());
+    if (result.success) {
+        alert("✅ Excel generado en: " + result.filePath);
+    } else {
+        alert("❌ Error al generar Excel: " + result.error);
+    }
+    });
+
     const procesarTexto = (texto) => {
         const lineas = texto.split("\n").slice(3); // Omitir cabecera
         let resultados = [];
@@ -81,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (resultadoLinea != ""){
                     if(plancha != ""){
                         hayPlanchas = true;
-                        resultados.push(cont + "- "+ resultadoLinea);
+                        resultados.push(resultadoLinea);
                     }else{
                         resultados.push("BULK: "+ resultadoLinea);
                     }
@@ -96,26 +106,38 @@ document.addEventListener("DOMContentLoaded", () => {
                 let idAir = partesLinea[0].substring(0, 12);
                 let piezas = partesLinea[1].slice(1).match(/^\d+/); // Tomamos desde el segundo carácter y extraemos los números hasta una letra
                 if(plancha != ""){
-                    resultadoLinea = resultadoLinea + piezas + " piezas " +idAir+", ";
+                    resultadoLinea = resultadoLinea + piezas + " PCS " +idAir+", ";
                 }else{
-                    resultadoLinea = resultadoLinea + piezas + " piezas " +idAir+", "; 
-                }
-                
-
-                
-            }
-
-            
-
-            
+                    resultadoLinea = resultadoLinea + piezas + " PCS " +idAir+", "; 
+                }          
+            } 
         }
 
         if (resultadoLinea != ""){
-            resultados.push(cont + "- "+ resultadoLinea);
+            resultados.push(resultadoLinea);
         }
         
         btnBorrar.style.display = "block";
         return resultados.join("\n");
+    };
+
+    const generarDatosExcel = () => {
+        let datos = [];
+        for (let resultado of output.textContent.split("\n")){
+            let cabecera = resultado.slice(0).match(`^[^:]*`);
+            let fila = [];
+            fila.push(cabecera);
+            let contenido = resultado.slice(resultado.indexOf(":")+1);
+            let paquetes = contenido.split(",");
+            for(let paquete of paquetes){
+                fila.push(paquete);
+            }
+            datos.push(fila);
+        }
+      
+
+        console.log(datos)
+        return datos;
     };
 
     btnEnviar.addEventListener("click", () => {

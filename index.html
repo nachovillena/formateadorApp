@@ -32,19 +32,25 @@
             </div>
             <div class="box" id="content-documento" style="display: none;">
                 <input type="file" id="file-input" style="display: none;" required>
-                <button class="button is-primary" id="btn-subir">Subir Archivo</button>
+                <button class="button is-primary" id="btn-subir">Seleccionar Archivo</button>
                 <button class="button is-danger" id="btn-quitar" style="display: none;">Quitar Archivo</button>
                 <p id="file-name" class="mt-2"></p>
                 <p id="error-message" class="has-text-danger mt-2" style="display: none;">Debe seleccionar un archivo si no ingresa texto.</p>
             </div>
-            <div class="box" >
-                <button class="button is-success mt-3" id="btn-enviar">Enviar</button>
-                <button class="button is-danger" id="btn-borrar" style="display: none;">Borrar resultado</button>
+            <div class="box">
+                <div class="is-flex is-align-items-center">
+                    <button class="button is-success mt-3 mr-3" id="btn-enviar">Procesar</button>
+                    <button class="button is-danger mt-3" id="btn-borrar" style="display: none;">Borrar resultado</button>
+                </div>
             </div>
             
             
             <div class="box mt-5" id="resultado" style="display: none;">
-                <h2 class="title is-4">Resultado: <button class="button is-success mt-3" id="btn-copiar">Copiar</button></h2>
+                <div class="is-flex is-align-items-center">
+                    <h2 class="title is-4 mr-4">Resultado:</h2>
+                    <button class="button is-success mt-3" id="btn-copiar">Copiar</button>
+                    <button class="button is-success mt-3 ml-3" id="btn-excel">Exportar a Excel</button>
+                </div>
                 <pre id="output"></pre>
             </div>
         </div>

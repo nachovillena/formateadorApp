@@ -3,7 +3,7 @@ aplicación pequeña para formatear los archivos de la carga de los vuelos
 
 INSTALACION
 
-1. Tener instalado node.js(igual o mayor a la v16) y npm, si no lo tienes lo puedes descargar de aqui: https://nodejs.org/en/download
+1. Tener instalado node.js(igual o mayor a la v20 por el tema de la libreria de excel) y npm, si no lo tienes lo puedes descargar de aqui: https://nodejs.org/en/download
 
 2. hacer un npm install
 
